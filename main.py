@@ -45,6 +45,12 @@ def learn_dataset2(C, sigma):
     model = svm.svm_train(second_dataset()[0], second_dataset()[1], C, gaussian)
     svm.visualize_boundary(second_dataset()[0], second_dataset()[1], model)
 
+def suboptimal_learning_dataset3(C, sigma):
+    gaussian = svm.partial(svm.gaussian_kernel, sigma=sigma)
+    gaussian.__name__ = svm.gaussian_kernel.__name__
+    model = svm.svm_train(third_dataset()[0], third_dataset()[1], C, gaussian)
+    svm.visualize_boundary(third_dataset()[0], third_dataset()[1], model)
+
 def main():
     #first_data_display()
     #learn_dataset1(1)
@@ -53,7 +59,8 @@ def main():
     #gaussian_kernel_display(3)
     #second_data_display()
     #learn_dataset2(1.0, 0.1)
-    third_data_display()
+    #third_data_display()
+    #suboptimal_learning_dataset3(1, 0.5)
 
 if __name__ == '__main__':
     main()
