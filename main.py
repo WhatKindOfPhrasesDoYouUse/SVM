@@ -27,6 +27,11 @@ def learn_dataset1(C: int):
 def gaussian_kernel_display(sigma: int):
     svm.contour(sigma)
 
+def learn_dataset2(C, sigma):
+    gaussian = svm.partial(svm.gaussian_kernel, sigma=sigma)
+    gaussian.__name__ = svm.gaussian_kernel.__name__
+    model = svm.svm_train(second_dataset()[0], second_dataset()[1], C, gaussian)
+    svm.visualize_boundary(second_dataset()[0], second_dataset()[1], model)
 
 def main():
     #first_data_display()
@@ -34,7 +39,8 @@ def main():
     #learn_dataset1(100)
     #gaussian_kernel_display(1)
     #gaussian_kernel_display(3)
-    second_data_display()
+    #second_data_display()
+    learn_dataset2(1.0, 0.1)
 
 if __name__ == '__main__':
     main()
