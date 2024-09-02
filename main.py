@@ -15,10 +15,16 @@ def learn_dataset1(C: int):
     model = svm.svm_train(first_dataset()[0], first_dataset()[1], C, svm.linear_kernel, 0.001, 20)
     svm.visualize_boundary_linear(first_dataset()[0], first_dataset()[1], model, 'Разделяющая граница при C={}'.format(C))
 
+def gaussian_kernel_display(n: int):
+    svm.contour(n)
+
+
 def main():
     first_data_display()
     learn_dataset1(1)
     learn_dataset1(100)
+    gaussian_kernel_display(1)
+    gaussian_kernel_display(3)
 
 if __name__ == '__main__':
     main()
