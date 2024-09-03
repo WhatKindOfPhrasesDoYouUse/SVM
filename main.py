@@ -51,16 +51,36 @@ def suboptimal_learning_dataset3(C, sigma):
     model = svm.svm_train(third_dataset()[0], third_dataset()[1], C, gaussian)
     svm.visualize_boundary(third_dataset()[0], third_dataset()[1], model)
 
+def optimal_training_dataset3():
+    x, y, x_val, y_val = third_dataset()
+    min_error = float('inf')
+    for C in [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30]:
+        for sigma in [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30]:
+            gaussian = svm.partial(svm.gaussian_kernel, sigma=sigma)
+            gaussian.__name__ = svm.gaussian_kernel.__name__
+            model = svm.svm_train(x, y, C, gaussian)
+            ypred = svm.svm_predict(model, x_val)
+            error = np.mean(ypred != y_val.ravel())
+            if error < min_error:
+                min_error = error
+                true_sigma = sigma
+                true_c = C
+                true_model = model
+    print(f'Оптимальное значение C: {true_c}\nОптимальное значение sigma: {true_sigma}')
+    svm.visualize_boundary(x, y, true_model)
+    svm.visualize_boundary(x_val, y_val, true_model)
+
 def main():
-    #first_data_display()
-    #learn_dataset1(1)
-    #learn_dataset1(100)
-    #gaussian_kernel_display(1)
-    #gaussian_kernel_display(3)
-    #second_data_display()
-    #learn_dataset2(1.0, 0.1)
-    #third_data_display()
-    #suboptimal_learning_dataset3(1, 0.5)
+    first_data_display()
+    learn_dataset1(1)
+    learn_dataset1(100)
+    gaussian_kernel_display(1)
+    gaussian_kernel_display(3)
+    second_data_display()
+    learn_dataset2(1.0, 0.1)
+    third_data_display()
+    suboptimal_learning_dataset3(1, 0.5)
+    optimal_training_dataset3()
 
 if __name__ == '__main__':
     main()
