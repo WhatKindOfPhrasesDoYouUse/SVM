@@ -34,7 +34,8 @@ def svm_train(X, Y, C, kernelFunction, tol=0.001, max_passes=5):
     elif kernelFunctionName == 'gaussian_kernel':
         X2 = np.sum(X**2, axis=1)[:, np.newaxis]
         K = X2 + (X2.T - 2*X.dot(X.T))
-        K = kernelFunction(1,0)**K
+        #K = kernelFunction(1,0)**K
+        K = np.exp(-K / (2 * 1 ** 2))
     else:
         K = np.zeros((m, m))
         for i in range(m):

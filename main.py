@@ -71,15 +71,15 @@ def optimal_training_dataset3():
     svm.visualize_boundary(x_val, y_val, true_model)
 
 def main():
-    first_data_display()
-    learn_dataset1(1)
-    learn_dataset1(100)
-    gaussian_kernel_display(1)
-    gaussian_kernel_display(3)
-    second_data_display()
-    learn_dataset2(1.0, 0.1)
-    third_data_display()
-    suboptimal_learning_dataset3(1, 0.5)
+    #first_data_display()
+    #learn_dataset1(1)
+    #learn_dataset1(100)
+    #gaussian_kernel_display(1)
+    #gaussian_kernel_display(3)
+    #second_data_display()
+    #learn_dataset2(1.0, 0.1)
+    #third_data_display()
+    #suboptimal_learning_dataset3(1, 0.5)
     optimal_training_dataset3()
 
 if __name__ == '__main__':
